@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {Helmet} from "rl-react-helmet";
 import styled from "styled-components";
 import Footer from "../Components/Footer";
+import Header from "../Components/Header";
 
 const Wrapper = styled.div`
     display : flex;
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
 
 const Column = styled.div`
     width : 100%;
-    max-width: 2500px;
+    max-width: 2000px;
     margin : 0 auto;
     border-bottom : 8px solid #222;
     display : flex;
@@ -69,10 +70,10 @@ const H3Text = styled.h3`
 const InputWrapper = styled.div`
   display : flex;
   justify-content: center;
-  width : 35%;
+  width : 50%;
 `
 const Input = styled.input`
-  min-width: 500px;
+  min-width: 450px;
   height: 55px;
   padding : 0px 10px;
 `
@@ -110,6 +111,7 @@ export default () => {
 
     return (
         <>
+        <Header isLoggedIn="false"/>
         <Wrapper>
             <Helmet>
                 <title>Netflix South Korea - Watch TV Shows Online, Watch Movies Online</title>

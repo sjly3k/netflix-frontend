@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import {Facebook, Globe, Instagram, Twitter, Youtube} from "./Icons";
+import {Link} from "react-router-dom";
 
 const colorType = type => {
     let color;
@@ -35,6 +37,16 @@ const ContentWrapper = styled.div`
 `
 
 const List = styled.ul`
+  color: #757575;
+  fill : gray;
+  a {
+    text-decoration: none;
+    color: #757575;
+  }
+  svg {
+    margin-right : 15px;
+    margin-bottom: 15px;
+  }
 `
 
 const ListItem = styled.li`
@@ -45,19 +57,15 @@ const ListItem = styled.li`
   font-size : 12px;
 `
 
-const Link = styled.a`
-  color: #757575;
-`
-
 const Text = styled.span`
   margin-bottom: 5px;
   color : gray;
   font-size: 12px;
-  &:nth-child(1) {
+  &:nth-child(2) {
     font-size: 18px;
     margin-bottom: 30px;
   };
-  &:nth-child(4) {
+  &:nth-child(5) {
     font-size: 13px;
     margin-top : 24px;
     margin-bottom: 13px;
@@ -68,72 +76,93 @@ const LanguageSelectorWrapper = styled.div`
   width: 133.5px;
   height: 53px;
   border : gray 1px solid;
+  margin-top : 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   
-  span:nth-child(1) {
+  svg {
+    fill : gray;
+    text-align: left;
+    margin-right: 10px;
+  }
+  
+  span:nth-child(2) {
       font-size: 16px;
-        margin : 0 0;
+      margin : 0;
   }
 `
-
 
 const Footer = ({type = "dark"}) => {
     return (
         <FooterDef type={type}>
             <ContentWrapper>
+                <List>
+                    <Link href="https://twitter.com/netflixkr">
+                        <Facebook size={25}/>
+                    </Link>
+                    <Link href="https://www.instagram.com/netflixkr/">
+                        <Instagram size={25}/>
+                    </Link>
+                    <Link href="https://www.facebook.com/NetflixKR">
+                        <Twitter size={25}/>
+                    </Link>
+                    <Link href="https://www.youtube.com/channel/UCiEEF51uRAeZeCo8CJFhGWw/featured">
+                        <Youtube size={25}/>
+                    </Link>
+                </List>
                 <Text>Questions? Call 00-308-321-0161</Text>
                 <List>
-                    <Link>
+                    <Link to="#">
                         <ListItem>FAQ</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Help Center</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Account</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Media Center</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Investor Relation</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Jobs</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Ways to Watch</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Terms of Use</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Privacy</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Cookies Preference</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Corporate Information</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Contact Us</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Speed Test</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Legal Notices</ListItem>
                     </Link>
-                    <Link>
+                    <Link to="#">
                         <ListItem>Netflix Originals</ListItem>
                     </Link>
                 </List>
 
                 <LanguageSelectorWrapper>
-                    <Text></Text>
+                    <Globe size={16}/>
                     <Text>English</Text>
                 </LanguageSelectorWrapper>
 
@@ -144,7 +173,6 @@ const Footer = ({type = "dark"}) => {
                 <Text>Address: 20F, Tower A, Centropolis Building 26, Ujeongguk-ro, Jongno-gu, Seoul, 03161 Republic of Korea</Text>
                 <Text>Hosted by: Amazon Web Services Inc.</Text>
                 <Text>Link to KFTC website</Text>
-
             </ContentWrapper>
         </FooterDef>
     )

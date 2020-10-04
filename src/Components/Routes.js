@@ -1,14 +1,16 @@
 import React from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { PropTypes } from "prop-types"
-import Browse from "../Routes/Browse";
 import Home from "../Routes/Home";
+import Content from "../Routes/Content";
+import ContentDetail from "../Routes/ContentDetail";
 
 const LoggedInRoutes = () => {
     return (
-        <>
-            <Route exact path="/" component={Browse}></Route>
-        </>
+        <Switch>
+            <Route path="/browse/:id" component={ContentDetail}/>
+            <Route exact path="/browse" component={Content}/>
+        </Switch>
     )
 }
 
