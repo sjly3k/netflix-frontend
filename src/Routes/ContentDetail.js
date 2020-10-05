@@ -14,6 +14,7 @@ const SEE_FULL_CONTENT = gql`
             genres {
                 name
             }
+            type
             caption
             episodes {
                 id
@@ -32,6 +33,7 @@ const SEE_FULL_CONTENT = gql`
             }
             is_netflix
             age_limit
+            createdAt
         }
     }
 `
@@ -39,10 +41,15 @@ const SEE_FULL_CONTENT = gql`
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   margin : 0 auto;
   width: 850px;
   position: relative;
+  
+  img {
+    width: 100%;
+  }
 `
 
 const ButtonWrapper = styled.div`
@@ -50,7 +57,8 @@ const ButtonWrapper = styled.div`
   display : flex;
   width: 40%;
   bottom: 5%;
-  left: 100px;
+  left: 30px;
+  bottom: 65px;
   
 `
 
@@ -94,6 +102,40 @@ const OtherButton = styled.button`
   }
 `
 
+const DetailWrapper = styled.div`
+  display: flex;
+  width: 850px;
+  background-color: ${props => props.theme.darkGreyColor};
+`
+
+const ContentDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  color : white;
+`
+
+const VideoMetaData = styled.div`
+  display: flex;
+  span.season {
+    
+  }
+`
+
+const ageChanger = (contentType, age_limit) => {
+    if (contentType === "TV_SHOW") {
+        if (age_limit === "ALL") {
+            return "ALL"
+        } else if (age_limit === "OVER_12") {
+            return "12+"
+        } else if (age_limit === "OVER_15") {
+            return "15+"
+        } else if (age_limit === "OVER_18") {
+            return "18+"
+        }
+    }
+}
+
 export default ({ match }) => {
     const contentId = match.params.id
     console.log(contentId)
@@ -135,6 +177,30 @@ export default ({ match }) => {
                     <ThumbsDownEmpty size={21}></ThumbsDownEmpty>
                 </OtherButton>
             </ButtonWrapper>
+            <DetailWrapper>
+                {
+                    !loading &&
+                    data &&
+                    data.seeFullContent && (() => {
+                        const year = data.seeFullContent.createdAt.split('-')[0]
+                        const ageLimit = ageChanger(data.seeFullContent.type, data.seeFullContent.age_limit)
+                        const season = Math.max.apply(null, data.seeFullContent.episodes.map(episode =>
+                            episode.season
+                        ))
+                        console.log(season)
+                        return (
+                            <ContentDetail>
+                                <VideoMetaData>
+                                    <span className="year">{year}</span>
+                                    <span className="ageLimit">{ageLimit}</span>
+                                    <span className="season">{season} Season</span>
+                                </VideoMetaData>
+                                <span className="caption">{data.seeFullContent.caption}</span>
+                            </ContentDetail>
+                        )
+                    })()
+                }
+            </DetailWrapper>
         </Container>
     )
 }
