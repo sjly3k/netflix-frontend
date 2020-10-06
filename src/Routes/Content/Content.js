@@ -1,37 +1,12 @@
-import Header from "../Components/Header";
+import Header from "../../Components/Header";
 import React from "react";
 import { Helmet } from "rl-react-helmet";
 import styled from "styled-components"
-import { gql } from "apollo-boost"
 import {useQuery} from "react-apollo-hooks";
-import Footer from "../Components/Footer";
+import Footer from "../../Components/Footer";
 import {Link} from "react-router-dom";
+import { CONTENT_QUERY } from "./ContentSharedQueries"
 
-const CONTENT_QUERY = gql`
-    {
-        showAllContent {
-            id,
-            title,
-            genres {
-                name
-            },
-            type,
-            duration,
-            actors {
-                name
-            },
-            files {
-                url
-                type
-            },
-            isLiked,
-            likeCount,
-            createdAt,
-            is_netflix,
-            age_limit,
-        }
-    }
-`
 const Container = styled.div`
 
 `

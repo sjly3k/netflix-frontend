@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { PropTypes } from "prop-types"
 import Home from "../Routes/Home";
-import Content from "../Routes/Content";
-import ContentDetail from "../Routes/ContentDetail";
+import Content from "../Routes/Content/Content";
+import ContentDetail from "../Routes/ContentDetail/ContentDetail";
+import Login from "../Routes/Login";
 
 const LoggedInRoutes = () => {
     return (
@@ -18,6 +19,7 @@ const LoggedOutRoutes = () => {
     return (
         <>
             <Route exact path="/" component={Home}></Route>
+            <Route path="/signup" component={Login}></Route>
         </>
     )
 }

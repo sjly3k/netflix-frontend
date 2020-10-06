@@ -14,4 +14,7 @@ export default createGlobalStyle`
   input:focus {
     outline : none;
   }
+  a {
+    text-decoration: none;
+  }
 `
