@@ -120,7 +120,9 @@ const Header = ({isLoggedIn}) => {
                 </Menu>
                 </>
             ) : (
-                <SignUpButton type="button">Sign Up</SignUpButton>
+                <Link to="/signup">
+                    <SignUpButton type="button">Sign Up</SignUpButton>
+                </Link>
             )}
         </HeaderContainer>
     )
