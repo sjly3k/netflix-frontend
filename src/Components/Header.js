@@ -21,6 +21,7 @@ const isFixed = isLoggedIn => {
 const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   margin : 0 auto;
   height: 70px;
@@ -34,13 +35,13 @@ const HeaderContainer = styled.header`
 `
 
 const Logo = styled.img`
-  width: 100px;
+  width: 150px;
   height: 100%;
   margin-right: 25px;
 `
 
 const SignUpButton = styled.button`
-  background-color: red;
+  background-color: #e50914;
   width: 80px;
   height: 60%;
   color : white;
@@ -48,6 +49,11 @@ const SignUpButton = styled.button`
   border-radius: 10%;
   padding : 7px;
   outline: none;
+  border : none;
+`
+
+const SignUpButtonWrapper = styled.div`
+  
 `
 
 const Menu = styled.ul`
@@ -120,9 +126,11 @@ const Header = ({isLoggedIn}) => {
                 </Menu>
                 </>
             ) : (
-                <Link to="/signup">
-                    <SignUpButton type="button">Sign Up</SignUpButton>
-                </Link>
+                <SignUpButtonWrapper>
+                    <Link to="/signup">
+                        <SignUpButton type="button">Sign Up</SignUpButton>
+                    </Link>
+                </SignUpButtonWrapper>
             )}
         </HeaderContainer>
     )

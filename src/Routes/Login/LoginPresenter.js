@@ -1,13 +1,15 @@
-import React from "react";
 import styled from "styled-components";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
+import Header from "../../Components/Header";
 import {Link} from "react-router-dom";
+import Footer from "../../Components/Footer";
+import React from "react";
 
 const Container = styled.div`
   max-width: 450px;
   min-height: 660px;
   margin : 0 auto;
+  border : 10px solid ${props => props.theme.darkGreyColor};
+  border-radius: 5px;
 `
 
 const LoginForm = styled.div`
@@ -106,7 +108,11 @@ const CaptchaText = styled.div`
     }
 `
 
-export default () => {
+export default ({
+    onSubmit,
+    email,
+    password,
+}) => {
     return (
         <>
             <Header/>
@@ -115,9 +121,11 @@ export default () => {
                     <Title>
                         <h2>Sign In</h2>
                     </Title>
-                    <LoginInput placeholder="Email or phone number"></LoginInput>
-                    <LoginInput placeholder="Password"></LoginInput>
-                    <LoginButton>Sign In</LoginButton>
+                    <form onSubmit={onSubmit}>
+                        <LoginInput placeholder="Email or phone number" type="email" {...email}></LoginInput>
+                        <LoginInput placeholder="Password" type="password" {...password}></LoginInput>
+                        <LoginButton>Sign In</LoginButton>
+                    </form>
                     <HelpColumn>
                         <CheckBoxWrapper>
                             <InputCheckBox type="checkbox"/>
