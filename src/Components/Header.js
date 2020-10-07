@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const LogoPng = require('../Static/netflix_logo.png')
 
 const isFixed = isLoggedIn => {
-    if (isLoggedIn === "true") {
+    if (isLoggedIn === true) {
         return `
             background-color: rgb(30, 30, 30);
             position : fixed;
@@ -78,7 +78,7 @@ const Header = ({isLoggedIn}) => {
             <Link to="/">
                 <Logo src={LogoPng}/>
             </Link>
-            { isLoggedIn === "true" ? (
+            { isLoggedIn === true ? (
                 <>
                 <Menu>
                     <Link to="#">

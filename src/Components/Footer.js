@@ -39,10 +39,13 @@ const ContentWrapper = styled.div`
 const List = styled.ul`
   color: #757575;
   fill : gray;
+  
   a {
     text-decoration: none;
     color: #757575;
+    fill : gray;
   }
+  
   svg {
     margin-right : 15px;
     margin-bottom: 15px;
@@ -99,18 +102,18 @@ const Footer = ({type = "dark"}) => {
         <FooterDef type={type}>
             <ContentWrapper>
                 <List>
-                    <Link to="https://twitter.com/netflixkr">
+                    <a href="https://twitter.com/netflixkr">
                         <Facebook size={25}/>
-                    </Link>
-                    <Link to="https://www.instagram.com/netflixkr/">
+                    </a>
+                    <a href="https://www.instagram.com/netflixkr/">
                         <Instagram size={25}/>
-                    </Link>
-                    <Link to="https://www.facebook.com/NetflixKR">
+                    </a>
+                    <a href="https://www.facebook.com/NetflixKR">
                         <Twitter size={25}/>
-                    </Link>
-                    <Link to="https://www.youtube.com/channel/UCiEEF51uRAeZeCo8CJFhGWw/featured">
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCiEEF51uRAeZeCo8CJFhGWw/featured">
                         <Youtube size={25}/>
-                    </Link>
+                    </a>
                 </List>
                 <Text>Questions? Call 00-308-321-0161</Text>
                 <List>

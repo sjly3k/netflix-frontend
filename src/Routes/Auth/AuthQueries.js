@@ -27,3 +27,29 @@ export const CREATE_ACCOUNT = gql`
         )
     }
 `
+
+export const CONTENT_QUERY = gql`
+    {
+        showAllContent {
+            id
+            title
+            genres {
+                name
+            }
+            type
+            caption
+            duration
+            actors {
+                name
+            }
+            files {
+                url
+                type
+            }
+            likeCount
+            createdAt
+            is_netflix
+            age_limit
+        }
+    }
+`

@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import Header from "../../Components/Header";
-import {Link} from "react-router-dom";
 import Footer from "../../Components/Footer";
 import React from "react";
 import {Check} from "../../Components/Icons";
 
 const Container = styled.div`
-  max-width: 1300px;
+  max-width: 1000px;
   min-height: 660px;
   margin : 0 auto;
   border : 5px solid ${props => props.theme.darkGreyColor};
@@ -112,13 +111,13 @@ const CaptchaText = styled.div`
 
 const LikedContentsContainer = styled.div`
   display : grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 7px;
   margin-top : 20px;
 `
 
 const LikedContentsWrapper = styled.div`
-  max-width: 1000px;
+  max-width: 800px;
   margin : 20px auto;
 `
 
@@ -164,7 +163,9 @@ const LikedContentBigTitle = styled.div`
 `
 
 const LikedContentsItem = styled.div`
-  width: 100%;
+  img {
+    width: 100%;
+  }
 `
 
 export default ({
@@ -177,7 +178,9 @@ export default ({
     likedContents,
     setLikedContents,
     onSubmit,
-    handleClick
+    handleClick,
+    allContentDataLoading,
+    allContentData
 }) => {
 
     return (
@@ -236,36 +239,23 @@ export default ({
                                             </LikedContentsText>
 
                                             <LikedContentsContainer>
-                                                <LikedContentsItem>
-                                                    <img id="a" onClick={handleClick} src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABW_7qTCrMtB3H6Wda3V5cO_60MDM8st0PyQlH1UkvKKd6fSCvLgb3P6z3xVZbUG0U_a3-D0_YNUeni641NdzlTO6IQ.jpg?r=ab0"/>
-                                                </LikedContentsItem>
-                                                <LikedContentsItem>
-                                                    <img id="b" onClick={handleClick} src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABW_7qTCrMtB3H6Wda3V5cO_60MDM8st0PyQlH1UkvKKd6fSCvLgb3P6z3xVZbUG0U_a3-D0_YNUeni641NdzlTO6IQ.jpg?r=ab0"/>
-                                                </LikedContentsItem>
-                                                <LikedContentsItem>
-                                                    <img id="c" onClick={handleClick} src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABW_7qTCrMtB3H6Wda3V5cO_60MDM8st0PyQlH1UkvKKd6fSCvLgb3P6z3xVZbUG0U_a3-D0_YNUeni641NdzlTO6IQ.jpg?r=ab0"/>
-                                                </LikedContentsItem>
-                                                <LikedContentsItem>
-                                                    <img id="d" onClick={handleClick} src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABW_7qTCrMtB3H6Wda3V5cO_60MDM8st0PyQlH1UkvKKd6fSCvLgb3P6z3xVZbUG0U_a3-D0_YNUeni641NdzlTO6IQ.jpg?r=ab0"/>
-                                                </LikedContentsItem>
-                                                <LikedContentsItem>
-                                                    <img id="e" onClick={handleClick} src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABW_7qTCrMtB3H6Wda3V5cO_60MDM8st0PyQlH1UkvKKd6fSCvLgb3P6z3xVZbUG0U_a3-D0_YNUeni641NdzlTO6IQ.jpg?r=ab0"/>
-                                                </LikedContentsItem>
-                                                <LikedContentsItem>
-                                                    <img id="f" onClick={handleClick} src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABW_7qTCrMtB3H6Wda3V5cO_60MDM8st0PyQlH1UkvKKd6fSCvLgb3P6z3xVZbUG0U_a3-D0_YNUeni641NdzlTO6IQ.jpg?r=ab0"/>
-                                                </LikedContentsItem>
-                                                <LikedContentsItem>
-                                                    <img id="a" onClick={handleClick} src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABW_7qTCrMtB3H6Wda3V5cO_60MDM8st0PyQlH1UkvKKd6fSCvLgb3P6z3xVZbUG0U_a3-D0_YNUeni641NdzlTO6IQ.jpg?r=ab0"/>
-                                                </LikedContentsItem>
-                                                <LikedContentsItem>
-                                                    <img id="a" onClick={handleClick} src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABW_7qTCrMtB3H6Wda3V5cO_60MDM8st0PyQlH1UkvKKd6fSCvLgb3P6z3xVZbUG0U_a3-D0_YNUeni641NdzlTO6IQ.jpg?r=ab0"/>
-                                                </LikedContentsItem>
-                                                <LikedContentsItem>
-                                                    <img id="a" onClick={handleClick} src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABW_7qTCrMtB3H6Wda3V5cO_60MDM8st0PyQlH1UkvKKd6fSCvLgb3P6z3xVZbUG0U_a3-D0_YNUeni641NdzlTO6IQ.jpg?r=ab0"/>
-                                                </LikedContentsItem>
-                                                <LikedContentsItem>
-                                                    <img id="a" onClick={handleClick} src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABW_7qTCrMtB3H6Wda3V5cO_60MDM8st0PyQlH1UkvKKd6fSCvLgb3P6z3xVZbUG0U_a3-D0_YNUeni641NdzlTO6IQ.jpg?r=ab0"/>
-                                                </LikedContentsItem>
+                                                {
+                                                    !allContentDataLoading &&
+                                                    allContentData &&
+                                                    allContentData.showAllContent &&
+                                                    allContentData.showAllContent.map((content) => {
+                                                        if (content.files.find(file => file.type === "RECOMMEND")) {
+                                                            const recommendImg = content.files.find(file => file.type === "RECOMMEND")['url']
+
+                                                            return (
+                                                                <LikedContentsItem>
+                                                                    <img id={content.id} onClick={handleClick}
+                                                                         src={recommendImg}/>
+                                                                </LikedContentsItem>
+                                                            )
+                                                        }
+                                                    })
+                                                }
                                             </LikedContentsContainer>
                                         </LikedContentsWrapper>
 

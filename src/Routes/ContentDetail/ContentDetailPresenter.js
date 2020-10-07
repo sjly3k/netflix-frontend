@@ -1,20 +1,13 @@
-import React from "react";
-import {useQuery} from "react-apollo-hooks";
 import styled from "styled-components";
 import {
-    MaturityRating_ALL,
-    MaturityRating_12,
-    MaturityRating_15,
-    MaturityRating_18,
+    BackButtonArrow,
     Play,
     Plus,
     ThumbsDownEmpty,
-    ThumbsUpEmpty,
-    BackButtonArrow
+    ThumbsUpEmpty
 } from "../../Components/Icons";
 import {Link} from "react-router-dom";
-import {SEE_FULL_CONTENT} from "./ContentDetailQueries";
-import { CONTENT_QUERY } from "../Content/ContentSharedQueries"
+import React from "react";
 
 const Container = styled.div`
   display: flex;
@@ -292,57 +285,13 @@ const MoreLikeThisItemColumn = styled.div`
   margin: 8px 0px;
   padding : 0px 14px;
 `
-const ageChanger = (data) => {
-    const contentType = data.type
-    const ageLimit = data.age_limit
-    if (contentType === "TV_SHOW") {
-        if (ageLimit === "ALL") {
-            return "ALL"
-        } else if (ageLimit === "OVER_12") {
-            return "12+"
-        } else if (ageLimit === "OVER_15") {
-            return "15+"
-        } else if (ageLimit === "OVER_18") {
-            return "18+"
-        }
-    } else {
-        if (ageLimit === "ALL") {
-            return <MaturityRating_ALL size={32}/>
-        } else if (ageLimit === "OVER_12") {
-            return <MaturityRating_12 size={32}/>
-        } else if (ageLimit === "OVER_15") {
-            return <MaturityRating_15 size={32}/>
-        } else if (ageLimit === "OVER_18") {
-            return <MaturityRating_18 size={32}/>
-        }
-    }
-}
 
-const durationChanger = (duration) => {
-    const tvShowMinute = Math.floor(duration / 60)
-    const MovieHour = Math.floor(duration / 3600)
-    const MovieMinute = Math.floor((duration % 3600) / 60)
-    return [tvShowMinute, MovieHour, MovieMinute]
-}
-
-const checkLoading = (data, loading) => {
-    return !loading && data && data.seeFullContent
-}
-
-export default ({ match }) => {
-    const contentId = match.params.id
-
-    const { data, loading } = useQuery(SEE_FULL_CONTENT, {
-        variables : {
-            id : contentId
-        }
-    })
-
-    const {
-        data : allContentData,
-        loading : allContentDataLoading
-    } = useQuery(CONTENT_QUERY)
-
+export default ({
+    contentData,
+    allContentData,
+    ageChanger,
+    durationChanger,
+}) => {
     return (
         <Container>
             <Link to="/browse">
@@ -351,13 +300,13 @@ export default ({ match }) => {
                 </BackButton>
             </Link>
             {
-                checkLoading(data, loading) && (() => {
-                    const describeImg = data.seeFullContent.files.find(file => file.type === "DESCRIBE")['url']
-                    const titleImg = data.seeFullContent.files.find(file => file.type === "TITLE")['url']
+                contentData && (() => {
+                    const describeImg = contentData.seeFullContent.files.find(file => file.type === "DESCRIBE")['url']
+                    const titleImg = contentData.seeFullContent.files.find(file => file.type === "TITLE")['url']
                     return (
                         <MainImage>
-                            <img className="describeImg" alt={data.seeFullContent.title} src={describeImg}/>
-                            <img className="titleImg" alt={data.seeFullContent.title} src={titleImg}/>
+                            <img className="describeImg" alt={contentData.seeFullContent.title} src={describeImg}/>
+                            <img className="titleImg" alt={contentData.seeFullContent.title} src={titleImg}/>
                             <ButtonWrapper>
                                 <PlayButton>
                                     <Play size={21}></Play>
@@ -380,14 +329,14 @@ export default ({ match }) => {
             <DetailEpisodeContainer>
                 <DetailWrapper>
                     {
-                        checkLoading(data, loading) && (() => {
-                            const year = data.seeFullContent.createdAt.split('-')[0]
-                            const ageLimit = ageChanger(data.seeFullContent)
-                            const season = Math.max.apply(null, data.seeFullContent.episodes.map(episode =>
+                        contentData && (() => {
+                            const year = contentData.seeFullContent.createdAt.split('-')[0]
+                            const ageLimit = ageChanger(contentData.seeFullContent)
+                            const season = Math.max.apply(null, contentData.seeFullContent.episodes.map(episode =>
                                 episode.season
                             ))
 
-                            if (data.seeFullContent.type === "TV_SHOW") {
+                            if (contentData.seeFullContent.type === "TV_SHOW") {
                                 return (
                                     <ContentDetail>
                                         <VideoMetaData>
@@ -396,29 +345,30 @@ export default ({ match }) => {
                                             <span className="TVShowAgeLimit">{ageLimit}</span>
                                             <span className="season">{season} Season</span>
                                         </VideoMetaData>
-                                        <span className="caption">{data.seeFullContent.caption}</span>
+                                        <span className="caption">{contentData.seeFullContent.caption}</span>
                                     </ContentDetail>
                                 )
                             }
-                            else if (data.seeFullContent.type === "MOVIE") {
+                            else if (contentData.seeFullContent.type === "MOVIE") {
                                 return (
                                     <ContentDetail>
                                         <VideoMetaData>
                                             <span className="matchScore">98% Match</span>
                                             <span className="year">{year}</span>
                                             <span className="MovieAgeLimit">{ageLimit}</span>
-                                            <span className="duration">{durationChanger(data.seeFullContent.duration)[1]}h {durationChanger(data.seeFullContent.duration)[2]}m</span>
+                                            <span className="duration">{durationChanger(contentData.seeFullContent.duration)[1]}h
+                                                {durationChanger(contentData.seeFullContent.duration)[2]}m</span>
                                         </VideoMetaData>
-                                        <span className="caption">{data.seeFullContent.caption}</span>
+                                        <span className="caption">{contentData.seeFullContent.caption}</span>
                                     </ContentDetail>
                                 )
                             }
                         })()
                     }
                     {
-                        checkLoading(data, loading) && (() => {
-                            const actors = data.seeFullContent.actors.map(actor => actor.name).join(', ')
-                            const genres = data.seeFullContent.genres.map(genre => genre.name).join(', ')
+                        contentData && (() => {
+                            const actors = contentData.seeFullContent.actors.map(actor => actor.name).join(', ')
+                            const genres = contentData.seeFullContent.genres.map(genre => genre.name).join(', ')
                             return (
                                 <ContentDetail>
                                     <span className="tagLabel">
@@ -444,8 +394,8 @@ export default ({ match }) => {
                 <Episodes>
                     <span className="title">Episodes</span>
                     {
-                        checkLoading(data, loading) &&
-                        data.seeFullContent.episodes.map((episode, index) => {
+                        contentData &&
+                        contentData.seeFullContent.episodes.map((episode, index) => {
                             return (
                                 <EpisodeItem>
                                     <span className="titleIndex">{index + 1}</span>
@@ -465,51 +415,50 @@ export default ({ match }) => {
                 <MoreLikeThis>
                     <span className="title">More Like This</span>
                     <MoreLikeThisItemWrapper>
-                    {
-                        !allContentDataLoading &&
-                        allContentData &&
-                        allContentData.showAllContent &&
-                        allContentData.showAllContent.map((content) => {
-                            if (content.type === "MOVIE") {
-                                const describeImg = content.files.find(file => file.type === "MAIN")['url']
-                                const year = content.createdAt.split('-')[0]
-                                const ageLimit = ageChanger(content)
+                        {
+                            allContentData &&
+                            allContentData.showAllContent.map((content) => {
+                                if (content.type === "MOVIE") {
+                                    const describeImg = content.files.find(file => file.type === "MAIN")['url']
+                                    const year = content.createdAt.split('-')[0]
+                                    const ageLimit = ageChanger(content)
 
-                                return (
-                                    <Link to={`/browse/${content.id}`}>
+                                    return (
                                         <MoreLikeThisItem>
-                                            <img className="describeImg" src={describeImg}/>
-                                            <span className="matchScore">98% Match</span>
-                                            <MoreLikeThisItemColumn>
-                                                <span className="MovieAgeLimit">{ageLimit}</span>
-                                                <span className="year">{year}</span>
-                                            </MoreLikeThisItemColumn>
-                                            <span className="caption">{content.caption}</span>
+                                            <Link to={`/browse/${content.id}`}>
+                                                <img className="describeImg" src={describeImg}/>
+                                                <span className="matchScore">98% Match</span>
+                                                <MoreLikeThisItemColumn>
+                                                    <span className="MovieAgeLimit">{ageLimit}</span>
+                                                    <span className="year">{year}</span>
+                                                </MoreLikeThisItemColumn>
+                                                <span className="caption">{content.caption}</span>
+                                            </Link>
                                         </MoreLikeThisItem>
-                                    </Link>
-                                )
-                            } else {
-                                const describeImg = content.files.find(file => file.type === "MAIN")['url']
-                                const year = content.createdAt.split('-')[0]
-                                const ageLimit = ageChanger(content)
 
-                                return (
-                                    <Link to={`/browse/${content.id}`}>
-                                        <MoreLikeThisItem>
-                                            <img className="describeImg" src={describeImg}/>
-                                            <span className="matchScore">98% Match</span>
-                                            <MoreLikeThisItemColumn>
-                                                <span className="TVShowAgeLimit">{ageLimit}</span>
-                                                <span className="year">{year}</span>
-                                            </MoreLikeThisItemColumn>
-                                            <span className="caption">{content.caption}</span>
-                                        </MoreLikeThisItem>
-                                    </Link>
-                                )
-                            }
+                                    )
+                                } else {
+                                    const describeImg = content.files.find(file => file.type === "MAIN")['url']
+                                    const year = content.createdAt.split('-')[0]
+                                    const ageLimit = ageChanger(content)
 
-                        })
-                    }
+                                    return (
+                                        <Link to={`/browse/${content.id}`}>
+                                            <MoreLikeThisItem>
+                                                <img className="describeImg" src={describeImg}/>
+                                                <span className="matchScore">98% Match</span>
+                                                <MoreLikeThisItemColumn>
+                                                    <span className="TVShowAgeLimit">{ageLimit}</span>
+                                                    <span className="year">{year}</span>
+                                                </MoreLikeThisItemColumn>
+                                                <span className="caption">{content.caption}</span>
+                                            </MoreLikeThisItem>
+                                        </Link>
+                                    )
+                                }
+
+                            })
+                        }
                     </MoreLikeThisItemWrapper>
                 </MoreLikeThis>
             </DetailEpisodeContainer>

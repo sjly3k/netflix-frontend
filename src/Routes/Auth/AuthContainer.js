@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useInput from "../../Hooks/useInput";
-import {useMutation} from "react-apollo-hooks";
-import {LOG_IN, LOCAL_LOG_IN, CREATE_ACCOUNT} from "./AuthQueries";
+import {useMutation, useQuery} from "react-apollo-hooks";
+import {LOG_IN, LOCAL_LOG_IN, CREATE_ACCOUNT, CONTENT_QUERY} from "./AuthQueries";
 import AuthPresenter from "./AuthPresenter";
 import {toast} from "react-toastify";
 
@@ -14,9 +14,14 @@ export default () => {
     const confirmPassword = useInput("")
     const phoneNumber = useInput("");
 
+    const { data, loading } = useQuery(CONTENT_QUERY)
     const [logInMutation] = useMutation(LOG_IN);
     const [localLogInMutation] = useMutation(LOCAL_LOG_IN)
     const [createAccountMutation] = useMutation(CREATE_ACCOUNT)
+
+    if (loading === false) {
+        console.log(data)
+    }
 
     const handleLogin = async () => {
         if (email.value !== "" && password.value !== "") {
@@ -27,9 +32,7 @@ export default () => {
                         password: password.value
                     }
                 })
-                console.log(token)
                 if (token !== "" && token !== undefined) {
-                    console.log(token)
                     localLogInMutation({
                         variables: {
                             token: token
@@ -49,7 +52,8 @@ export default () => {
         e.preventDefault();
         if (action === "logIn") {
             handleLogin();
-        } else if (action === "signUp") {
+        }
+        else if (action === "signUp") {
             if (email.value !== "" &&
                 password.value !== "" &&
                 confirmPassword.value !== "" &&
@@ -60,6 +64,7 @@ export default () => {
                 }
             }
             try {
+
                 const { data : { createAccount }} = await createAccountMutation({
                     variables : {
                         email : email.value,
@@ -86,6 +91,7 @@ export default () => {
     const handleClick = (event) => {
         const { target } = event;
         setLikedContents([...likedContents, target.id])
+        console.log(likedContents)
     }
 
     return <AuthPresenter
@@ -99,5 +105,7 @@ export default () => {
         setLikedContents={setLikedContents}
         onSubmit={onSubmit}
         handleClick={handleClick}
+        allContentDataLoading={loading}
+        allContentData={data}
     />
 }
