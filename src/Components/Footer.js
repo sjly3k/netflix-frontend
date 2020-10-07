@@ -99,16 +99,16 @@ const Footer = ({type = "dark"}) => {
         <FooterDef type={type}>
             <ContentWrapper>
                 <List>
-                    <Link href="https://twitter.com/netflixkr">
+                    <Link to="https://twitter.com/netflixkr">
                         <Facebook size={25}/>
                     </Link>
-                    <Link href="https://www.instagram.com/netflixkr/">
+                    <Link to="https://www.instagram.com/netflixkr/">
                         <Instagram size={25}/>
                     </Link>
-                    <Link href="https://www.facebook.com/NetflixKR">
+                    <Link to="https://www.facebook.com/NetflixKR">
                         <Twitter size={25}/>
                     </Link>
-                    <Link href="https://www.youtube.com/channel/UCiEEF51uRAeZeCo8CJFhGWw/featured">
+                    <Link to="https://www.youtube.com/channel/UCiEEF51uRAeZeCo8CJFhGWw/featured">
                         <Youtube size={25}/>
                     </Link>
                 </List>

@@ -356,8 +356,8 @@ export default ({ match }) => {
                     const titleImg = data.seeFullContent.files.find(file => file.type === "TITLE")['url']
                     return (
                         <MainImage>
-                            <img className="describeImg" src={describeImg}/>
-                            <img className="titleImg" src={titleImg}/>
+                            <img className="describeImg" alt={data.seeFullContent.title} src={describeImg}/>
+                            <img className="titleImg" alt={data.seeFullContent.title} src={titleImg}/>
                             <ButtonWrapper>
                                 <PlayButton>
                                     <Play size={21}></Play>
@@ -449,7 +449,7 @@ export default ({ match }) => {
                             return (
                                 <EpisodeItem>
                                     <span className="titleIndex">{index + 1}</span>
-                                    <img className="videoImg" src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABaicZ43pSrQkXOnz16Ir4cUMoJkrSq9NA5lpeDEmD1Q4vvgaluPQXCkemfXZrgpHMVju6AoLe8oqUQ4s9Pu-Jj4wqCckk2bo_hl60utztOjhNp5O.webp?r=53e"/>
+                                    <img className="videoImg" alt={episode.title} src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABaicZ43pSrQkXOnz16Ir4cUMoJkrSq9NA5lpeDEmD1Q4vvgaluPQXCkemfXZrgpHMVju6AoLe8oqUQ4s9Pu-Jj4wqCckk2bo_hl60utztOjhNp5O.webp?r=53e"/>
                                     <EpisodeMetaData>
                                         <EpisodeMetaDataColumn>
                                             <span className="episodeTitle">{episode.title}</span>

@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types"
 import Home from "../Routes/Home";
 import Content from "../Routes/Content/Content";
 import ContentDetail from "../Routes/ContentDetail/ContentDetail";
-import Login from "../Routes/Login";
+import Login from "../Routes/Auth";
 
 const LoggedInRoutes = () => {
     return (

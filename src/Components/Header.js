@@ -14,6 +14,7 @@ const isFixed = isLoggedIn => {
     } else {
         return `
             position : static;
+            justify-content: space-between;
         `
     }
 }
@@ -21,7 +22,6 @@ const isFixed = isLoggedIn => {
 const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   margin : 0 auto;
   height: 70px;
@@ -75,13 +75,13 @@ const MenuList = styled.li`
 const Header = ({isLoggedIn}) => {
     return (
         <HeaderContainer isLoggedIn={isLoggedIn}>
-            <Link href="#">
+            <Link to="/">
                 <Logo src={LogoPng}/>
             </Link>
             { isLoggedIn === "true" ? (
                 <>
                 <Menu>
-                    <Link to={"#"}>
+                    <Link to="#">
                         <MenuList>Home</MenuList>
                     </Link>
                     <Link to="#">

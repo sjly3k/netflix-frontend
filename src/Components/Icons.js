@@ -234,3 +234,17 @@ export const BackButtonArrow = ({size}) => (
         <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/>
     </svg>
 )
+
+export const Check = ({size}) => (
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 32 32"
+        className="svg-icon svg-icon-check-mark"
+        focusable="false">
+        <g id="check-mark">
+            <path
+                d="M14.133 23.5l12.767-12.467c0.033-0.033 0.1-0.1 0.133-0.167l-3.1-3.133c-0.067 0.033-0.133 0.1-0.2 0.167l-11.267 10.933-4.267-4.333-3.233 2.933c0.033 0 1.067 1.067 1.1 1.067l4.767 5 0.133 0.133c0.433 0.4 0.967 0.633 1.5 0.633s1.1-0.233 1.5-0.633z"></path>
+        </g>
+    </svg>
+)
