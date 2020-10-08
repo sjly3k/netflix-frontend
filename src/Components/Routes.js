@@ -4,7 +4,8 @@ import { PropTypes } from "prop-types"
 import Home from "../Routes/Home";
 import Content from "../Routes/Content";
 import ContentDetail from "../Routes/ContentDetail";
-import Login from "../Routes/Auth";
+import Payment from "../Routes/Payment";
+import Auth from "../Routes/Auth";
 
 const LoggedInRoutes = () => {
     return (
@@ -19,7 +20,10 @@ const LoggedOutRoutes = () => {
     return (
         <>
             <Route exact path="/" component={Home}></Route>
-            <Route path="/signup" component={Login}></Route>
+            <Switch>
+                <Route path = "/signup/payment" component={Payment}></Route>
+                <Route exact path="/signup" component={Auth}></Route>
+            </Switch>
         </>
     )
 }
