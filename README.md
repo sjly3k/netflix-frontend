@@ -23,4 +23,8 @@ Iconmonstr
     1-5. Search Page (https://www.netflix.com/search?q=Despicable) <login needed>
     1-6. Profile Page (https://www.netflix.com/profiles/manage) <login needed>
     1-7. Content Detail Page (https://www.netflix.com/browse?jbv=70140425) <login needed>
-       
+
+## 2. 구현 해야하는 것
+    1. Payment
+    2. Payment 했는지 안했는지에 따라 접속할 수 있는 페이지 제한
+    
