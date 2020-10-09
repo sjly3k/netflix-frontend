@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import useInput from "../../Hooks/useInput";
 import {useMutation, useQuery} from "react-apollo-hooks";
 import {LOG_IN, LOCAL_LOG_IN, CREATE_ACCOUNT, CONTENT_QUERY} from "./AuthQueries";
 import AuthPresenter from "./AuthPresenter";
 import {toast} from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 export default () => {
+    let history = useHistory()
     const [action, setAction] = useState("logIn")
     const [likedContents, setLikedContents] = useState([]);
 
@@ -19,33 +21,41 @@ export default () => {
     const [localLogInMutation] = useMutation(LOCAL_LOG_IN)
     const [createAccountMutation] = useMutation(CREATE_ACCOUNT)
 
-    if (loading === false) {
-        console.log(data)
-    }
-
     const handleLogin = async () => {
+        // 결제가 되어 있으면 (plan이 있으면 browse로 가게 하고, 안되어 있으면 signup/payment로 가게한다.)
         if (email.value !== "" && password.value !== "") {
             try {
-                const {data: {Login: token}} = await logInMutation({
+                const {data : {Login : { token, payment }}} = await logInMutation({
                     variables: {
                         email: email.value,
                         password: password.value
                     }
                 })
                 if (token !== "" && token !== undefined) {
-                    localLogInMutation({
+                    await localLogInMutation({
                         variables: {
                             token: token
                         }}
                     )
-                    window.location ="/browse";
+                    if (payment === null) {
+                        setTimeout(() => history.push("/signup/payment"), 2000)
+
+                    } else {
+                        history.push("/browse")
+                    }
                 } else {
                     toast.error(`로그인에 실패하였습니다😢 email 또는 Password를 확인해 주세요.`);
                 }
             } catch (e) {
+                console.log(e)
                 toast.error(`로그인에 실패하였습니다😢 email 또는 Password를 확인해 주세요.`);
             }
         }
+    }
+
+    const handleSignUpButton = (email) => {
+        console.log("handleSignup", email)
+        history.pushState(email, "Payment","/signup/payment")
     }
 
     const onSubmit = async e => {
@@ -64,7 +74,6 @@ export default () => {
                 }
             }
             try {
-
                 const { data : { createAccount }} = await createAccountMutation({
                     variables : {
                         email : email.value,
@@ -107,5 +116,6 @@ export default () => {
         handleClick={handleClick}
         allContentDataLoading={loading}
         allContentData={data}
+        handleSignUpButton={handleSignUpButton}
     />
 }

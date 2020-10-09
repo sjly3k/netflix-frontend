@@ -32,3 +32,24 @@ export const CONTENT_QUERY = gql`
         }
     }
 `
+
+export const ME_QUERY = gql`
+    {
+        me {
+            id,
+            avatar,
+            userName,
+            email,
+            phoneNumber,
+            password,
+            likes {
+                id
+            }
+            payment {
+                plan
+            },
+            createdAt,
+            updatedAt,
+        }
+    }
+`

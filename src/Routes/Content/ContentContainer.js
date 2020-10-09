@@ -1,6 +1,6 @@
 import React from "react";
 import {useQuery} from "react-apollo-hooks";
-import {CONTENT_QUERY, IS_LOGGED_IN_QUERY} from "../SharedQueries";
+import {CONTENT_QUERY, IS_LOGGED_IN_QUERY, ME_QUERY} from "../SharedQueries";
 import ContentPresenter from "./ContentPresenter";
 
 export default () => {
@@ -9,11 +9,7 @@ export default () => {
     } = useQuery(IS_LOGGED_IN_QUERY)
 
     const { data, loading } = useQuery(CONTENT_QUERY)
-
-    if (loading === false) {
-        console.log("ContentContainer", data)
-        console.log(isLoggedIn)
-    }
+    console.log(loading)
 
     const returnMovies = (contents) => {
         return contents.filter(content => content.type === "MOVIE")
@@ -27,14 +23,16 @@ export default () => {
         return contents.filter(content => content.is_netflix === true)
     }
 
-    const randomNumber = (data) => {
-        return Math.floor(Math.random() * data.showAllContent.length)
+    const randomNumber = (returnedData) => {
+        console.log(returnedData)
+        return Math.floor(Math.random() * returnedData.showAllContent.length)
     }
 
     return (
         <ContentPresenter
             isLoggedIn={isLoggedIn}
             randomNumber={randomNumber}
+            loading={loading}
             contentData={data}
             returnMovies={returnMovies}
             returnTvShows={returnTvShows}

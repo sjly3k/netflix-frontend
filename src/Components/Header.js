@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import {Bell, Gift, Kids, Search, User} from "./Icons";
-import { Link } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import {gql} from "apollo-boost"
+import {useMutation} from "react-apollo-hooks";
 
 const LogoPng = require('../Static/netflix_logo.png')
 
@@ -60,6 +62,7 @@ const Menu = styled.ul`
   display : flex;
   align-items: center;
   text-align: center;
+  
   a {
     text-decoration: none;
   }
@@ -72,7 +75,57 @@ const MenuList = styled.li`
   fill: white;
 `
 
+const DropDownDiv = styled.div`
+  position: relative;
+  display: inline-block;
+  
+  :hover {
+    display: block;
+    
+    div {
+      display: block;
+    }
+  }
+`
+
+const DropDownBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  
+  a:visited {background-color: #ddd;}
+`
+
+const DropdownContent = styled.div`
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  
+  a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+  }
+`
+
+export const LOG_OUT = gql`
+    mutation logUserOut {
+        logUserOut @client
+    }
+`;
+
 const Header = ({isLoggedIn}) => {
+    let history = useHistory()
+    const option = ["one", "two"]
+    const [logOut] = useMutation(LOG_OUT)
+    const handleLogout = () => {
+        logOut()
+        history.push("/")
+    }
     return (
         <HeaderContainer isLoggedIn={isLoggedIn}>
             <Link to="/">
@@ -80,49 +133,55 @@ const Header = ({isLoggedIn}) => {
             </Link>
             { isLoggedIn === true ? (
                 <>
-                <Menu>
-                    <Link to="#">
-                        <MenuList>Home</MenuList>
-                    </Link>
-                    <Link to="#">
-                        <MenuList>TV Shows</MenuList>
-                    </Link>
-                    <Link to="#">
-                        <MenuList>Movies</MenuList>
-                    </Link>
-                    <Link to="#">
-                        <MenuList>Latest</MenuList>
-                    </Link>
-                    <Link to="#">
-                        <MenuList>My List</MenuList>
-                    </Link>
-                </Menu>
-                <Menu>
-                    <Link to="#">
+                    <Menu>
+                        <Link to="#">
+                            <MenuList>Home</MenuList>
+                        </Link>
+                        <Link to="#">
+                            <MenuList>TV Shows</MenuList>
+                        </Link>
+                        <Link to="#">
+                            <MenuList>Movies</MenuList>
+                        </Link>
+                        <Link to="#">
+                            <MenuList>Latest</MenuList>
+                        </Link>
+                        <Link to="#">
+                            <MenuList>My List</MenuList>
+                        </Link>
+                    </Menu>
+                    <Menu>
                         <MenuList>
-                            <Search size={24}/>
+                            <DropDownDiv>
+                                <DropDownBtn>
+                                    <User size={24}/>
+                                </DropDownBtn>
+                                <DropdownContent>
+                                    <Link onClick={() => alert("Profile")}>Profile</Link>
+                                    <Link onClick={() => handleLogout()}>Logout</Link>
+                                </DropdownContent>
+                            </DropDownDiv>
                         </MenuList>
-                    </Link>
-                    <Link to="#">
-                        <MenuList>
-                            <Gift size={24}/>
-                        </MenuList>
-                    </Link>
-                    <Link to="#">
-                        <MenuList>
-                            <Kids size={24}/>
-                        </MenuList>
-                    </Link>
-                    <Link to="#">
-                        <MenuList>
-                            <Bell size={24}/>
-                        </MenuList>
-                    </Link>
-                    <Link to="#">
-                        <MenuList>
-                            <User size={24}/>
-                        </MenuList>
-                    </Link>
+                        <Link to="#">
+                            <MenuList>
+                                <Search size={24}/>
+                            </MenuList>
+                        </Link>
+                        <Link to="#">
+                            <MenuList>
+                                <Gift size={24}/>
+                            </MenuList>
+                        </Link>
+                        <Link to="#">
+                            <MenuList>
+                                <Kids size={24}/>
+                            </MenuList>
+                        </Link>
+                        <Link to="#">
+                            <MenuList>
+                                <Bell size={24}/>
+                            </MenuList>
+                        </Link>
                 </Menu>
                 </>
             ) : (

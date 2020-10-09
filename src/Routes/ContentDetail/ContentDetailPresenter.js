@@ -4,10 +4,11 @@ import {
     Play,
     Plus,
     ThumbsDownEmpty,
-    ThumbsUpEmpty
+    ThumbsUpEmpty, ThumbsUpFull
 } from "../../Components/Icons";
 import {Link} from "react-router-dom";
 import React from "react";
+import Loader from "../../Components/Loader";
 
 const Container = styled.div`
   display: flex;
@@ -202,6 +203,7 @@ const EpisodeMetaData = styled.div`
   
   span.caption {
     font-size : 16px;
+    line-height: 20px;
     padding : 14px;
     padding-top: 0px;
     color : #D2D2D2;
@@ -270,12 +272,16 @@ const MoreLikeThisItem = styled.div`
     text-decoration: none;
   }
   
-  span.caption {
-    padding : 0px 14px 14px 14px;
-    color : #d2d2d2;
-    font-size: 14px;
-    line-height: 20px;
-  }
+`
+
+const MoreLikeThisItemCaption = styled.div`
+
+  width: 100%;
+  padding : 0px 14px 14px 14px;
+  color : #d2d2d2;
+  font-size: 14px;
+  line-height: 20px;  
+  
 `
 
 const MoreLikeThisItemColumn = styled.div`
@@ -289,20 +295,28 @@ const MoreLikeThisItemColumn = styled.div`
 export default ({
     contentData,
     allContentData,
+    loading,
+    allContentDataLoading,
+    meLoading,
     ageChanger,
     durationChanger,
+    meData,
+    handleToggleLike
 }) => {
     return (
         <Container>
+            {loading && allContentDataLoading && meLoading && <Loader/>}
             <Link to="/browse">
                 <BackButton>
                     <BackButtonArrow size={24}/>
                 </BackButton>
             </Link>
+
             {
-                contentData && (() => {
+                contentData && meData && (() => {
                     const describeImg = contentData.seeFullContent.files.find(file => file.type === "DESCRIBE")['url']
                     const titleImg = contentData.seeFullContent.files.find(file => file.type === "TITLE")['url']
+                    const isLiked = contentData.seeFullContent.likes.find(like => like.user.id === meData.me.id)
                     return (
                         <MainImage>
                             <img className="describeImg" alt={contentData.seeFullContent.title} src={describeImg}/>
@@ -315,8 +329,8 @@ export default ({
                                 <OtherButton>
                                     <Plus size={21}></Plus>
                                 </OtherButton>
-                                <OtherButton>
-                                    <ThumbsUpEmpty size={21}></ThumbsUpEmpty>
+                                <OtherButton onClick={() => handleToggleLike(contentData.seeFullContent.id)}>
+                                    { isLiked ? (<ThumbsUpFull size={21}/>) : (<ThumbsUpEmpty size={21}/> )}
                                 </OtherButton>
                                 <OtherButton>
                                     <ThumbsDownEmpty size={21}></ThumbsDownEmpty>
@@ -328,8 +342,9 @@ export default ({
             }
             <DetailEpisodeContainer>
                 <DetailWrapper>
+                    {loading && allContentDataLoading && meLoading && <Loader/>}
                     {
-                        contentData && (() => {
+                        !loading && !allContentDataLoading && contentData && (() => {
                             const year = contentData.seeFullContent.createdAt.split('-')[0]
                             const ageLimit = ageChanger(contentData.seeFullContent)
                             const season = Math.max.apply(null, contentData.seeFullContent.episodes.map(episode =>
@@ -356,8 +371,7 @@ export default ({
                                             <span className="matchScore">98% Match</span>
                                             <span className="year">{year}</span>
                                             <span className="MovieAgeLimit">{ageLimit}</span>
-                                            <span className="duration">{durationChanger(contentData.seeFullContent.duration)[1]}h
-                                                {durationChanger(contentData.seeFullContent.duration)[2]}m</span>
+                                            <span className="duration">{durationChanger(contentData.seeFullContent.duration)[1]}h {durationChanger(contentData.seeFullContent.duration)[2]}m</span>
                                         </VideoMetaData>
                                         <span className="caption">{contentData.seeFullContent.caption}</span>
                                     </ContentDetail>
@@ -366,7 +380,7 @@ export default ({
                         })()
                     }
                     {
-                        contentData && (() => {
+                        !loading && !allContentDataLoading && contentData && (() => {
                             const actors = contentData.seeFullContent.actors.map(actor => actor.name).join(', ')
                             const genres = contentData.seeFullContent.genres.map(genre => genre.name).join(', ')
                             return (
@@ -394,6 +408,7 @@ export default ({
                 <Episodes>
                     <span className="title">Episodes</span>
                     {
+                        !loading && !allContentDataLoading &&
                         contentData &&
                         contentData.seeFullContent.episodes.map((episode, index) => {
                             return (
@@ -416,6 +431,7 @@ export default ({
                     <span className="title">More Like This</span>
                     <MoreLikeThisItemWrapper>
                         {
+                            !loading && !allContentDataLoading &&
                             allContentData &&
                             allContentData.showAllContent.map((content) => {
                                 if (content.type === "MOVIE") {
@@ -432,7 +448,9 @@ export default ({
                                                     <span className="MovieAgeLimit">{ageLimit}</span>
                                                     <span className="year">{year}</span>
                                                 </MoreLikeThisItemColumn>
-                                                <span className="caption">{content.caption}</span>
+                                                <MoreLikeThisItemCaption>
+                                                    <span className="caption">{content.caption}</span>
+                                                </MoreLikeThisItemCaption>
                                             </Link>
                                         </MoreLikeThisItem>
 
@@ -451,7 +469,9 @@ export default ({
                                                     <span className="TVShowAgeLimit">{ageLimit}</span>
                                                     <span className="year">{year}</span>
                                                 </MoreLikeThisItemColumn>
-                                                <span className="caption">{content.caption}</span>
+                                                <MoreLikeThisItemCaption>
+                                                    <span className="caption">{content.caption}</span>
+                                                </MoreLikeThisItemCaption>
                                             </MoreLikeThisItem>
                                         </Link>
                                     )

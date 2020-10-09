@@ -180,7 +180,8 @@ export default ({
     onSubmit,
     handleClick,
     allContentDataLoading,
-    allContentData
+    allContentData,
+    handleSignUpButton
 }) => {
 
     return (

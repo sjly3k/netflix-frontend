@@ -1,8 +1,8 @@
 import {MaturityRating_12, MaturityRating_15, MaturityRating_18, MaturityRating_ALL} from "../../Components/Icons";
 import React from "react";
-import {useQuery} from "react-apollo-hooks";
-import {SEE_FULL_CONTENT} from "./ContentDetailQueries";
-import {CONTENT_QUERY} from "../SharedQueries";
+import {useMutation, useQuery} from "react-apollo-hooks";
+import {SEE_FULL_CONTENT, TOGGLE_LIKE} from "./ContentDetailQueries";
+import {CONTENT_QUERY, ME_QUERY} from "../SharedQueries";
 import ContentDetailPresenter from "./ContentDetailPresenter";
 
 export default ({ match }) => {
@@ -18,6 +18,10 @@ export default ({ match }) => {
         data : allContentData,
         loading : allContentDataLoading
     } = useQuery(CONTENT_QUERY)
+
+    const [toggleLikeMutation] = useMutation(TOGGLE_LIKE)
+
+    const { data : meData, loading : meLoading } = useQuery(ME_QUERY)
 
     const ageChanger = (data) => {
         const contentType = data.type
@@ -52,12 +56,26 @@ export default ({ match }) => {
         return [tvShowMinute, MovieHour, MovieMinute]
     }
 
+
+    const handleToggleLike = (contentId) => {
+        if (contentId !== undefined) {
+            const handle = toggleLikeMutation({
+                variables : {contentId : contentId}
+            })
+        }
+    }
+
     return (
         <ContentDetailPresenter
             contentData={data}
             allContentData={allContentData}
+            loading={loading}
+            allContentDataLoading={allContentDataLoading}
+            meLoading={meLoading}
             ageChanger={ageChanger}
             durationChanger={durationChanger}
+            meData={meData}
+            handleToggleLike={handleToggleLike}
         />
     )
 }

@@ -8,7 +8,16 @@ export const LOCAL_LOG_IN = gql`
 
 export const LOG_IN = gql`
     mutation Login($email: String!, $password: String!) {
-        Login(email: $email, password: $password)
+        Login(email: $email, password: $password) {
+            id
+            token
+            email
+            phoneNumber
+            userName
+            payment {
+                plan
+            }
+        }
     }
 `;
 

@@ -12,6 +12,7 @@ const LoggedInRoutes = () => {
         <Switch>
             <Route path="/browse/:id" component={ContentDetail}/>
             <Route exact path="/browse" component={Content}/>
+            <Route path = "/signup/payment" component={Payment}></Route>
         </Switch>
     )
 }
@@ -20,10 +21,7 @@ const LoggedOutRoutes = () => {
     return (
         <>
             <Route exact path="/" component={Home}></Route>
-            <Switch>
-                <Route path = "/signup/payment" component={Payment}></Route>
-                <Route exact path="/signup" component={Auth}></Route>
-            </Switch>
+            <Route exact path="/signup" component={Auth}></Route>
         </>
     )
 }

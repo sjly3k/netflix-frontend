@@ -31,6 +31,20 @@ export const SEE_FULL_CONTENT = gql`
             is_netflix
             age_limit
             createdAt
+            likes {
+                user {
+                    id
+                }
+            }
         }
+    }
+`
+export const TOGGLE_LIKE = gql`
+    mutation toggleLike(
+        $contentId : String!
+    ) {
+        toggleLike(
+            contentId : $contentId
+        )
     }
 `
