@@ -207,6 +207,7 @@ export default ({
     action,
     setAction,
     loading,
+    meData,
     plan,
     amount,
     colorSelectOnChange,
@@ -215,7 +216,11 @@ export default ({
     return (
         <>
             {loading && <Loader/>}
-            {!loading && action === "planSelect" && setTimeout(() => <Loader />, 5000) ? (
+            {
+                !loading &&
+                meData &&
+                meData.me &&
+                action === "planSelect" && setTimeout(() => <Loader />, 1000) ? (
                 <>
                     <Container>
                         <PaymentTitle>

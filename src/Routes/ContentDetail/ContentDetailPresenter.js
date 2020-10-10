@@ -313,7 +313,11 @@ export default ({
             </Link>
 
             {
-                contentData && meData && (() => {
+                contentData &&
+                contentData.seeFullContent &&
+                meData &&
+                meData.me &&
+                (() => {
                     const describeImg = contentData.seeFullContent.files.find(file => file.type === "DESCRIBE")['url']
                     const titleImg = contentData.seeFullContent.files.find(file => file.type === "TITLE")['url']
                     const isLiked = contentData.seeFullContent.likes.find(like => like.user.id === meData.me.id)
@@ -344,7 +348,11 @@ export default ({
                 <DetailWrapper>
                     {loading && allContentDataLoading && meLoading && <Loader/>}
                     {
-                        !loading && !allContentDataLoading && contentData && (() => {
+                        !loading &&
+                        !allContentDataLoading &&
+                        contentData &&
+                        contentData.seeFullContent &&
+                        (() => {
                             const year = contentData.seeFullContent.createdAt.split('-')[0]
                             const ageLimit = ageChanger(contentData.seeFullContent)
                             const season = Math.max.apply(null, contentData.seeFullContent.episodes.map(episode =>
@@ -380,7 +388,11 @@ export default ({
                         })()
                     }
                     {
-                        !loading && !allContentDataLoading && contentData && (() => {
+                        !loading &&
+                        !allContentDataLoading &&
+                        contentData &&
+                        contentData.seeFullContent &&
+                        (() => {
                             const actors = contentData.seeFullContent.actors.map(actor => actor.name).join(', ')
                             const genres = contentData.seeFullContent.genres.map(genre => genre.name).join(', ')
                             return (
@@ -408,8 +420,10 @@ export default ({
                 <Episodes>
                     <span className="title">Episodes</span>
                     {
-                        !loading && !allContentDataLoading &&
+                        !loading &&
+                        !allContentDataLoading &&
                         contentData &&
+                        contentData.seeFullContent &&
                         contentData.seeFullContent.episodes.map((episode, index) => {
                             return (
                                 <EpisodeItem>
@@ -431,8 +445,10 @@ export default ({
                     <span className="title">More Like This</span>
                     <MoreLikeThisItemWrapper>
                         {
-                            !loading && !allContentDataLoading &&
+                            !loading &&
+                            !allContentDataLoading &&
                             allContentData &&
+                            allContentData.showAllContent &&
                             allContentData.showAllContent.map((content) => {
                                 if (content.type === "MOVIE") {
                                     const describeImg = content.files.find(file => file.type === "MAIN")['url']

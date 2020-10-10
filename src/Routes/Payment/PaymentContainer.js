@@ -22,7 +22,6 @@ export default () => {
 
     useEffect(() => {
         if (meLoading === false) {
-            console.log(meData)
             setEmail(meData.me.email)
             setUserName(meData.me.userName)
             setPhoneNumber(meData.me.phoneNumber)
@@ -87,6 +86,7 @@ export default () => {
             action={action}
             setAction={setAction}
             loading={meLoading}
+            meData={meData}
             plan={plan}
             amount={amount}
             colorSelectOnChange={colorSelectOnChange}

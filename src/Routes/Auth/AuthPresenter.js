@@ -163,6 +163,9 @@ const LikedContentBigTitle = styled.div`
 `
 
 const LikedContentsItem = styled.div`
+  img:active, img:focus {
+    outline: 2px solid white;
+  };
   img {
     width: 100%;
   }

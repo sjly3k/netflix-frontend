@@ -44,11 +44,11 @@ export default () => {
                         history.push("/browse")
                     }
                 } else {
-                    toast.error(`로그인에 실패하였습니다😢 email 또는 Password를 확인해 주세요.`);
+                    alert(`로그인에 실패하였습니다😢 email 또는 Password를 확인해 주세요.`);
                 }
             } catch (e) {
                 console.log(e)
-                toast.error(`로그인에 실패하였습니다😢 email 또는 Password를 확인해 주세요.`);
+                alert(`로그인에 실패하였습니다😢 email 또는 Password를 확인해 주세요.`);
             }
         }
     }
@@ -69,7 +69,7 @@ export default () => {
                 confirmPassword.value !== "" &&
                 phoneNumber.value !== "") {
                 if (password.value !== confirmPassword.value) {
-                    toast.error("비밀번호가 일치하지 않습니다.")
+                    alert("비밀번호가 일치하지 않습니다.")
                     return false;
                 }
             }
@@ -83,7 +83,7 @@ export default () => {
                     }
                 });
                 if (!createAccount) {
-                    toast.error("Fail to Sign Up.")
+                    alert("Fail to Sign Up.")
                 } else {
                     setTimeout(() => handleLogin(), 1000);
                     email.setValue("")
@@ -92,7 +92,7 @@ export default () => {
                     phoneNumber.setValue("")
                 }
             } catch (e) {
-                toast.error(e.message)
+                alert(e.message)
             }
         }
     }
