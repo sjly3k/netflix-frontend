@@ -313,6 +313,8 @@ export default ({
             </Link>
 
             {
+                !loading &&
+                !allContentDataLoading &&
                 contentData &&
                 contentData.seeFullContent &&
                 meData &&
