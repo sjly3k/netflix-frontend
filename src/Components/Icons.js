@@ -181,7 +181,7 @@ export const ThumbsDownFull = ({size}) => (
     </svg>
 )
 
-export const MaturityRating_18 = ({size}) => (
+export const MaturityRating18 = ({size}) => (
     <svg
         width={size}
         height={size}
@@ -192,7 +192,7 @@ export const MaturityRating_18 = ({size}) => (
     </svg>
 )
 
-export const MaturityRating_15 = ({size}) => (
+export const MaturityRating15 = ({size}) => (
     <svg
         width={size}
         height={size}
@@ -203,7 +203,7 @@ export const MaturityRating_15 = ({size}) => (
     </svg>
 )
 
-export const MaturityRating_12 = ({size}) => (
+export const MaturityRating12 = ({size}) => (
     <svg
         width={size}
         height={size}
@@ -214,7 +214,7 @@ export const MaturityRating_12 = ({size}) => (
     </svg>
 )
 
-export const MaturityRating_ALL = ({size}) => (
+export const MaturityRatingALL = ({size}) => (
     <svg
         width={size}
         height={size}

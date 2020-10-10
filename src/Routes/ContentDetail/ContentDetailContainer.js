@@ -1,4 +1,8 @@
-import {MaturityRating_12, MaturityRating_15, MaturityRating_18, MaturityRating_ALL} from "../../Components/Icons";
+import {
+    MaturityRating12,
+    MaturityRating15,
+    MaturityRating18,
+    MaturityRatingALL} from "../../Components/Icons";
 import React from "react";
 import {useMutation, useQuery} from "react-apollo-hooks";
 import {SEE_FULL_CONTENT, TOGGLE_LIKE} from "./ContentDetailQueries";
@@ -38,13 +42,13 @@ export default ({ match }) => {
             }
         } else {
             if (ageLimit === "ALL") {
-                return <MaturityRating_ALL size={32}/>
+                return <MaturityRatingALL size={32}/>
             } else if (ageLimit === "OVER_12") {
-                return <MaturityRating_12 size={32}/>
+                return <MaturityRating12 size={32}/>
             } else if (ageLimit === "OVER_15") {
-                return <MaturityRating_15 size={32}/>
+                return <MaturityRating15 size={32}/>
             } else if (ageLimit === "OVER_18") {
-                return <MaturityRating_18 size={32}/>
+                return <MaturityRating18 size={32}/>
             }
         }
     }
@@ -57,9 +61,9 @@ export default ({ match }) => {
     }
 
 
-    const handleToggleLike = (contentId) => {
+    const handleToggleLike = async (contentId) => {
         if (contentId !== undefined) {
-            const handle = toggleLikeMutation({
+            await toggleLikeMutation({
                 variables : {contentId : contentId}
             })
         }

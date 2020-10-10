@@ -82,7 +82,7 @@ export default ({
                                     const found = movie.files.find(file => file.type === "MAIN")['url']
                                     return (
                                         <Link to={`/browse/${movie.id}`} key={movie.id}>
-                                            <img src={found} key={movie.id}/>
+                                            <img alt={movie.title} src={found} key={movie.id}/>
                                         </Link>
                                     )
                                 })
@@ -102,7 +102,7 @@ export default ({
                                     const found = tvShow.files.find(file => file.type === "MAIN")['url']
                                     return (
                                         <Link to={`/browse/${tvShow.id}`} key={tvShow.id}>
-                                            <img src={found} key={tvShow.id}/>
+                                            <img alt={tvShow.title} src={found} key={tvShow.id}/>
                                         </Link>
                                     )
                                 })
@@ -122,7 +122,7 @@ export default ({
                                     const found = netflix.files.find(file => file.type === "MAIN")['url']
                                     return (
                                         <Link to={`/browse/${netflix.id}`} key={netflix.id}>
-                                            <img src={found} key={netflix.id}/>
+                                            <img alt={netflix.title} src={found} key={netflix.id}/>
                                         </Link>
                                     )
                                 })

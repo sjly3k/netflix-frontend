@@ -120,7 +120,6 @@ export const LOG_OUT = gql`
 
 const Header = ({isLoggedIn}) => {
     let history = useHistory()
-    const option = ["one", "two"]
     const [logOut] = useMutation(LOG_OUT)
     const handleLogout = () => {
         logOut()

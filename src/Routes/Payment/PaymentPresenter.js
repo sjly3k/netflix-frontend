@@ -331,14 +331,14 @@ export default ({
                                     Credit or Debit Card
                                 </span>
                                 <CardContainer>
-                                    <img src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/bc.svg"/>
-                                    <img src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/lotte.svg"/>
-                                    <img src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/shinhan.svg"/>
-                                    <img src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/kb.svg"/>
-                                    <img src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/keb.svg"/>
-                                    <img src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/nh.svg"/>
-                                    <img src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/samsung.svg"/>
-                                    <img src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/hyundai.svg"/>
+                                    <img alt="bc" src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/bc.svg"/>
+                                    <img alt="lotte" src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/lotte.svg"/>
+                                    <img alt="shinhan" src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/shinhan.svg"/>
+                                    <img alt="kb" src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/kb.svg"/>
+                                    <img alt="keb" src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/keb.svg"/>
+                                    <img alt="nh" src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/nh.svg"/>
+                                    <img alt="samsung" src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/samsung.svg"/>
+                                    <img alt="hyundai" src="https://assets.nflxext.com/ffe/siteui/acquisition/payment/svg/hyundai.svg"/>
                                 </CardContainer>
                             </CardPicker>
                             <OrderItem>

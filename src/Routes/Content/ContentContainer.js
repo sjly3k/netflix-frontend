@@ -1,6 +1,6 @@
 import React from "react";
 import {useQuery} from "react-apollo-hooks";
-import {CONTENT_QUERY, IS_LOGGED_IN_QUERY, ME_QUERY} from "../SharedQueries";
+import {CONTENT_QUERY, IS_LOGGED_IN_QUERY} from "../SharedQueries";
 import ContentPresenter from "./ContentPresenter";
 
 export default () => {

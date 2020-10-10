@@ -28,7 +28,7 @@ export default () => {
             setPhoneNumber(meData.me.phoneNumber)
             setUserId(meData.me.id)
         }
-    }, [meLoading])
+    }, [meLoading, meData])
 
     // 아임포트로 KG이니시스 구현
     const openPay = async () => {
@@ -79,7 +79,7 @@ export default () => {
         } else {
             setAmount(9500)
         }
-    })
+    }, [plan])
 
 
     return (

@@ -441,8 +441,8 @@ export default ({
 
                                     return (
                                         <MoreLikeThisItem>
-                                            <Link to={`/browse/${content.id}`}>
-                                                <img className="describeImg" src={describeImg}/>
+                                            <Link to={`/browse/${content.id}`} key={content.id}>
+                                                <img alt={content.title} className="describeImg" src={describeImg}/>
                                                 <span className="matchScore">98% Match</span>
                                                 <MoreLikeThisItemColumn>
                                                     <span className="MovieAgeLimit">{ageLimit}</span>
@@ -461,9 +461,9 @@ export default ({
                                     const ageLimit = ageChanger(content)
 
                                     return (
-                                        <Link to={`/browse/${content.id}`}>
+                                        <Link to={`/browse/${content.id}`} key={content.id}>
                                             <MoreLikeThisItem>
-                                                <img className="describeImg" src={describeImg}/>
+                                                <img alt={content.title} className="describeImg" src={describeImg}/>
                                                 <span className="matchScore">98% Match</span>
                                                 <MoreLikeThisItemColumn>
                                                     <span className="TVShowAgeLimit">{ageLimit}</span>

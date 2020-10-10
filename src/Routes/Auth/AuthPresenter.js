@@ -250,10 +250,12 @@ export default ({
 
                                                             return (
                                                                 <LikedContentsItem>
-                                                                    <img id={content.id} onClick={handleClick}
+                                                                    <img alt={content.title} id={content.id} onClick={handleClick}
                                                                          src={recommendImg}/>
                                                                 </LikedContentsItem>
                                                             )
+                                                        } else {
+                                                            return null
                                                         }
                                                     })
                                                 }
