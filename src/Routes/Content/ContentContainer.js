@@ -9,7 +9,6 @@ export default () => {
     } = useQuery(IS_LOGGED_IN_QUERY)
 
     const { data, loading } = useQuery(CONTENT_QUERY)
-    console.log(loading)
 
     const returnMovies = (contents) => {
         return contents.filter(content => content.type === "MOVIE")
@@ -24,7 +23,6 @@ export default () => {
     }
 
     const randomNumber = (returnedData) => {
-        console.log(returnedData)
         return Math.floor(Math.random() * returnedData.showAllContent.length)
     }
 

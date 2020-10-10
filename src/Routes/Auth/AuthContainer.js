@@ -37,7 +37,7 @@ export default () => {
                         }}
                     )
                     if (payment === null) {
-                        setTimeout(() => history.push("/signup/payment"), 2000)
+                        setTimeout(() => window.location = "/signup/payment", 2000)
 
                     } else {
                         history.push("/browse")
@@ -46,7 +46,6 @@ export default () => {
                     alert(`로그인에 실패하였습니다😢 email 또는 Password를 확인해 주세요.`);
                 }
             } catch (e) {
-                console.log(e)
                 alert(`로그인에 실패하였습니다😢 email 또는 Password를 확인해 주세요.`);
             }
         }

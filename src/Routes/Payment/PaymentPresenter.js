@@ -318,7 +318,10 @@ export default ({
             ) : (
                 <>
                     {loading && <Loader/>}
-                    {!loading && setTimeout(() => <Loader />, 2000) && (
+                    {!loading &&
+                    meData &&
+                    meData.me &&
+                    setTimeout(() => <Loader />, 2000) && (
                         <Container>
                             <PaymentTitle>
                                 <span className="title">
