@@ -24,8 +24,34 @@ export const CONTENT_QUERY = gql`
                 url
                 type
             },
-            isLiked,
             likeCount,
+            createdAt,
+            is_netflix,
+            age_limit,
+        }
+    }
+`
+
+export const CONTENT_QUERY_WITH_ISLIKED = gql`
+    {
+        showAllContent {
+            id,
+            title,
+            genres {
+                name
+            },
+            type,
+            caption,
+            duration,
+            actors {
+                name
+            },
+            files {
+                url
+                type
+            },
+            likeCount,
+            isLiked,
             createdAt,
             is_netflix,
             age_limit,

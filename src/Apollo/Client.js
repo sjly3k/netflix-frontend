@@ -3,7 +3,7 @@ import { defaults } from "./LocalState";
 import { resolvers } from "./LocalState";
 
 export default new ApolloClient({
-    uri : "http://localhost:8000/",
+    uri : "https://jinflix.herokuapp.com/",
     clientState: {
         defaults,
         resolvers

@@ -6,7 +6,7 @@ import {
 import React from "react";
 import {useMutation, useQuery} from "react-apollo-hooks";
 import {SEE_FULL_CONTENT, TOGGLE_LIKE} from "./ContentDetailQueries";
-import {CONTENT_QUERY, ME_QUERY} from "../SharedQueries";
+import {CONTENT_QUERY_WITH_ISLIKED, ME_QUERY} from "../SharedQueries";
 import ContentDetailPresenter from "./ContentDetailPresenter";
 
 export default ({ match }) => {
@@ -21,7 +21,7 @@ export default ({ match }) => {
     const {
         data : allContentData,
         loading : allContentDataLoading
-    } = useQuery(CONTENT_QUERY)
+    } = useQuery(CONTENT_QUERY_WITH_ISLIKED)
 
     const [toggleLikeMutation] = useMutation(TOGGLE_LIKE)
 
