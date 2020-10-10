@@ -3,7 +3,6 @@ import useInput from "../../Hooks/useInput";
 import {useMutation, useQuery} from "react-apollo-hooks";
 import {LOG_IN, LOCAL_LOG_IN, CREATE_ACCOUNT, CONTENT_QUERY} from "./AuthQueries";
 import AuthPresenter from "./AuthPresenter";
-import {toast} from "react-toastify";
 import { useHistory } from "react-router-dom";
 
 export default () => {
