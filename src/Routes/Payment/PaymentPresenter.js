@@ -220,7 +220,7 @@ export default ({
                 !loading &&
                 meData &&
                 meData.me &&
-                action === "planSelect" && setTimeout(() => <Loader />, 1000) ? (
+                action === "planSelect" ? (
                 <>
                     <Container>
                         <PaymentTitle>

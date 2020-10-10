@@ -37,7 +37,7 @@ export default () => {
                         }}
                     )
                     if (payment === null) {
-                        setTimeout(() => window.location = "/signup/payment", 2000)
+                        window.location = "/signup/payment"
 
                     } else {
                         history.push("/browse")
